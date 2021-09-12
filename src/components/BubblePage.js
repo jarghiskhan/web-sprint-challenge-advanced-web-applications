@@ -11,10 +11,11 @@ const BubblePage = () => {
   const [updating, setUpdating] = useState();
 
   useEffect(() => {
-    fetchColorService().then(response=>{
-      setColors(response.data)
-    })
-    .catch((err)=>console.log(err))
+    fetchColorService()
+      .then((response) => {
+        setColors(response.data);
+      })
+      .catch((err) => console.log(err));
   }, [updating]);
 
   const toggleEdit = (value) => {
@@ -22,19 +23,23 @@ const BubblePage = () => {
   };
 
   const saveEdit = (editColor) => {
-    setUpdating(true)
+    setUpdating(true);
     axiosWithAuth()
-    .put(`/colors/${editColor.id}`, editColor)
-    .then(response => {setUpdating(false)})
-    .catch(err => console.log("put error: ", err))
+      .put(`/colors/${editColor.id}`, editColor)
+      .then((response) => {
+        setUpdating(false);
+      })
+      .catch((err) => console.log("put error: ", err));
   };
 
   const deleteColor = (colorToDelete) => {
-    setUpdating(true)
+    setUpdating(true);
     axiosWithAuth()
-    .delete(`/colors/${colorToDelete.id}`, colorToDelete)
-    .then(response => {setUpdating(false)})
-    .catch(err => console.log("put error: ", err))
+      .delete(`/colors/${colorToDelete.id}`, colorToDelete)
+      .then((response) => {
+        setUpdating(false);
+      })
+      .catch((err) => console.log("put error: ", err));
   };
 
   return (
